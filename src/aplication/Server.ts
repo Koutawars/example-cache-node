@@ -3,7 +3,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import mainRouter from '../infrastructure/driving/route-express/';
+import mainRouter from '../infrastructure/driving/express/routes';
 
 export class Server {
 

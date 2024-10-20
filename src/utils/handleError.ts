@@ -8,13 +8,12 @@ export const handleError = (error: ErrorHttp | Error) => {
       },
       status: error.status
     }
-  } else {
-    console.log(error);
-    return {
-      body: {
-        error: "Internal Server Error"
-      },
-      status: 500
-    }
+  }
+  console.log(error);
+  return {
+    body: {
+      error: "Internal Server Error"
+    },
+    status: 500
   }
 }
