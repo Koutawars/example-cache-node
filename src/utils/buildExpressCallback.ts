@@ -10,7 +10,6 @@ export const buildExpressCallback = (controller: Controller) => {
       params: req.params,
       query: req.query,
       headers: {
-        Authorization: req.get("Authorization"),
         User: req.get("User"),
       },
     };
