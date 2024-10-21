@@ -7,9 +7,9 @@ export const buildGetUserById = (getUserByIdUsecase: GetUserByIdUsecase) => {
   return async (httpRequest: HttpRequest): Promise<ControllerResponse> => {
     try {
       const { id } = httpRequest.params;
-      const posts = await getUserByIdUsecase({ id });
+      const users = await getUserByIdUsecase({ id });
       return {
-        body: posts,
+        body: users,
         status: 200
       };
     } catch (error) {
