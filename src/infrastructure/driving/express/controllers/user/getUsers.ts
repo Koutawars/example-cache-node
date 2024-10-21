@@ -2,12 +2,12 @@ import { ControllerResponse } from "../../../../../domain/models/ControllerRespo
 import { GetUsersUsecase } from "../../../../../usecase/user/getUsers";
 import { handleError } from "../../../../../utils/handleError";
 
-export const buildGetUsers = (getPostsUsecase: GetUsersUsecase) => {
+export const buildGetUsers = (getUserUsecase: GetUsersUsecase) => {
   return async (): Promise<ControllerResponse> => {
     try {
-      const posts = await getPostsUsecase();
+      const users = await getUserUsecase();
       return {
-        body: posts,
+        body: users,
         status: 200
       };
     } catch (error) {

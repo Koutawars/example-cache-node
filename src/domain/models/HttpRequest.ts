@@ -1,6 +1,6 @@
 export interface HttpRequest {
   body: object;
-  params: unknown;
+  params: { [key: string]: string };
   query: unknown;
   headers: { [key: string]: string };
 }
