@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import { ErrorHttp } from "../../../domain/models/ErrorHttp";
 import { User } from "../../../domain/models/User";
 import { UserRepository } from "./UserRepository";
@@ -21,7 +22,8 @@ export class UserFile implements UserRepository {
     return users.find((user: User) => user.id === id) || null;
   }
 
-  async create(user: User): Promise<void> {
+  async create(user: Partial<User>): Promise<void> {
+    user = { ...user, id: randomUUID() };
     const data = await fs.promises.readFile(this.path, "utf-8");
     const users = JSON.parse(data);
     users.push(user);
