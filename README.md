@@ -83,7 +83,7 @@ tsconfig.json
 
 1. Clona el repositorio:
   ```sh
-  git clone <URL_DEL_REPOSITORIO>
+  git clone https://github.com/Koutawars/example-cache-node.git
   ```
 
 1. Instala las dependencias:
