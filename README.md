@@ -103,6 +103,7 @@ tsconfig.json
   ```
 
 ## Ejemplos de Uso
+[Postman](example_cache.postman_collection.json)
 
 ### Crear Usuario
 ```sh
