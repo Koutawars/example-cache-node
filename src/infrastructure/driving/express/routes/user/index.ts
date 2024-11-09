@@ -7,5 +7,6 @@ router.get('/',  buildExpressCallback(userController.getUsers));
 router.get('/:id', buildExpressCallback(userController.getUserById));
 router.put('/:id', buildExpressCallback(userController.updateUser));
 router.post('/', buildExpressCallback(userController.createUser));
+router.delete('/:id', buildExpressCallback(userController.deleteUser));
 
 export default router;

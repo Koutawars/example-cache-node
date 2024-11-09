@@ -11,12 +11,12 @@ export const buildCreateUser = (createUserUsecase: CreateUserUsecase) => {
     try {
       validateJoi(schema, httpRequest);
       const user = {
-        name: httpRequest.body?.name,
-        email: httpRequest.body?.email,
+        name: httpRequest.body.name,
+        email: httpRequest.body.email,
       }
-      await createUserUsecase(user);
+      const createUser = await createUserUsecase(user);
       return {
-        body: user,
+        body: createUser,
         status: 200
       };
     } catch (error) {

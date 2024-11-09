@@ -1,7 +1,7 @@
 import { User } from "../../domain/models/User";
 import { UserRepository } from "../../infrastructure/driven/user/UserRepository";
 
-export type CreateUserUsecase = (user: Partial<User>) => Promise<void>;
+export type CreateUserUsecase = (user: Partial<User>) => Promise<User>;
 
 export const buildCreateUser = ({
   userRepository
@@ -9,6 +9,6 @@ export const buildCreateUser = ({
   userRepository: UserRepository
 }): CreateUserUsecase => {
   return async (user) => {
-    await userRepository.create(user);
+    return await userRepository.create(user);
   }
 }

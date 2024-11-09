@@ -22,22 +22,35 @@ export class UserFile implements UserRepository {
     return users.find((user: User) => user.id === id) || null;
   }
 
-  async create(user: Partial<User>): Promise<void> {
-    user = { ...user, id: randomUUID() };
+  async create(user: Partial<User>): Promise<User> {
+    const newUser = { name: user.name, email: user.email, id: randomUUID() };
     const data = await fs.promises.readFile(this.path, "utf-8");
     const users = JSON.parse(data);
-    users.push(user);
+    users.push(newUser);
     await fs.promises.writeFile(this.path, JSON.stringify(users));
+    return newUser;
   }
 
-  async update(id: string, user: User): Promise<void> {
+  async update(id: string, user: Partial<User>): Promise<User> {
     const data = await fs.promises.readFile(this.path, "utf-8");
     const users = JSON.parse(data);
     const index = users.findIndex((user: User) => user.id === id);
     if (index === -1) {
       throw new ErrorHttp(404, `User with id ${id} not found`);
     }
-    users[index] = user;
+    users[index] = { ...users[index], ...user };
+    await fs.promises.writeFile(this.path, JSON.stringify(users));
+    return users[index];
+  }
+
+  async deleteById(id: string): Promise<void> {
+    const data = await fs.promises.readFile(this.path, "utf-8");
+    const users = JSON.parse(data);
+    const index = users.findIndex((user: User) => user.id === id);
+    if (index === -1) {
+      throw new ErrorHttp(404, `User with id ${id} not found`);
+    }
+    users.splice(index, 1);
     await fs.promises.writeFile(this.path, JSON.stringify(users));
   }
 }

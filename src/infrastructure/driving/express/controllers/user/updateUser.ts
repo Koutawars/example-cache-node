@@ -11,14 +11,16 @@ export const buildUpdateUser = (updateUserUsecase: UpdateUserUsecase) => {
     try {
       validateJoi(schema, httpRequest);
       const { id } = httpRequest.params;
-      const user = {
-        id: id,
-        name: httpRequest.body?.name,
-        email: httpRequest.body?.email,
-      }
-      await updateUserUsecase(id, user);
+      const user = Object.fromEntries(
+        Object.entries({
+          id: id,
+          name: httpRequest.body?.name,
+          email: httpRequest.body?.email,
+        }).filter(([, v]) => v !== undefined)
+      );
+      const response = await updateUserUsecase(id, user);
       return {
-        body: user,
+        body: response,
         status: 200
       };
     } catch (error) {

@@ -7,8 +7,8 @@ const schema = Joi.object({
   body: Joi.object({
     name: Joi.string().optional(),
     email: Joi.string().email().optional(),
-  }).required()
-});
+  }).or('name', 'email').required()
+}).unknown(true);
 
 export {
   schema
